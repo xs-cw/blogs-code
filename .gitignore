@@ -1,0 +1,7 @@
+node_modules
+resources
+videos
+.env
+public/
+themes/
+.gitmodules
