@@ -5,3 +5,4 @@ videos
 public/
 themes/
 .gitmodules
+config.toml
