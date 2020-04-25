@@ -19,13 +19,14 @@ draft: false
 3. ### redis数据结构
 
    - 数据结构有:
-     | 类型常量     | 对象的名称 | 编码格式                                        |
-     | ------------ | ---------- | ----------------------------------------------- |
-     | REDIS_STRING | 字符串     | int、raw或者embstr                              |
-     | REDIS_LIST   | 列表       | ziplist或者linkedlist                           |
-     | REDIS_HASH   | 哈希       | ziplist或者hashtable(hashtable是由dict结构实现) |
-     | REDIS_SET    | 集合       | intset或者hashtable                             |
-     | REDIS_ZSET   | 有序集合   | ziplist，或者是skiplist与dict结合体             |
+   
+       | 类型常量     | 对象的名称 | 编码格式                                        |
+       | ------------ | ---------- | ----------------------------------------------- |
+       | REDIS_STRING | 字符串     | int、raw或者embstr                              |
+       | REDIS_LIST   | 列表       | ziplist或者linkedlist                           |
+       | REDIS_HASH   | 哈希       | ziplist或者hashtable(hashtable是由dict结构实现) |
+       | REDIS_SET    | 集合       | intset或者hashtable                             |
+       | REDIS_ZSET   | 有序集合   | ziplist，或者是skiplist与dict结合体             |
    - 底层实现
      https://blog.csdn.net/wcf373722432/article/details/78678504
 
