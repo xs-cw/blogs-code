@@ -18,9 +18,9 @@ draft: false
 
   - #### 使用 LxRunOffline 安装 WSL
 
-    下载解压 [LxRunOffline](https://p3terx.com/go/aHR0cHM6Ly9naXRodWIuY29tL0REb1NvbGl0YXJ5L0x4UnVuT2ZmbGluZS9yZWxlYXNlcw==) ，并设置环境变量以便使用`lxrunoffline`命令。
+    下载解压 [LxRunOffline](https://p3terx.com/archives/manage-wsl-with-lxrunoffline.html) ，并设置环境变量以便使用`lxrunoffline`命令。
 
-    下载 [WSL 官方离线包](https://p3terx.com/go/aHR0cHM6Ly9kb2NzLm1pY3Jvc29mdC5jb20vZW4tdXMvd2luZG93cy93c2wvaW5zdGFsbC1tYW51YWw=)，解压后可得到名为 `install.tar.gz` 的文件。
+    下载 [WSL 官方离线包](https://docs.microsoft.com/zh-cn/windows/wsl/install-manual)，解压后可得到名为 `install.tar.gz` 的文件。
 
     输入以下命令进行安装：
 
