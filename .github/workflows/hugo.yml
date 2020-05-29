@@ -30,7 +30,7 @@ jobs:
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          external_repository: xs-cw.github.io
+          external_repository: xs-cw/xs-cw.github.io
           publish_branch: master
           publish_dir: ./public
           commit_message: ${{ github.event.head_commit.message }}
