@@ -3,6 +3,6 @@ resources
 videos
 .env
 public/
-themes/
-.gitmodules
+# themes/
+# .gitmodules
 # config.toml
