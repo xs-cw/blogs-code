@@ -14,3 +14,8 @@ git remote -v
 # 添加远端仓库,pull/push时需要指定
 git remote set-url --add other https://other.test.com/zxbetter/test.git
 ```
+### git 贮藏
+```bash
+git stash save "stash info"
+git stash pop
+```
