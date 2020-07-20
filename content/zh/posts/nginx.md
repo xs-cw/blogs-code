@@ -36,6 +36,8 @@ draft: false
     }
 
     # 代理后端接口
+    # 原先前端请求地址 http://localhost:9090/server/index
+    # 修改成 http://localhost:9090/api/server/index
     location /api {
         # 接口地址修正
         rewrite ^/api/(.*)$ /$1 break;
