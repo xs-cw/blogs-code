@@ -13,7 +13,7 @@ draft: false
   # 安装zsh
   sudo apt-get install zsh
   # 安装oh-my-zsh
-  sh -c "$(curl https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+  sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 
   ```
   - oh-myzsh 其他自定义配置请[参考](https://www.jianshu.com/p/ba782b57ae96)
