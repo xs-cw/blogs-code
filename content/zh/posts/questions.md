@@ -288,7 +288,12 @@ draft: false
       - **Repeatable Read（可重读）**(数据库默认级别)
 
       - **Serializable（可串行化）**
-      - ![img](https://img2018.cnblogs.com/blog/1646034/201904/1646034-20190430095830286-1397235000.png)
+      -  | 隔离级别         | 脏读 | 不可重复读 | 幻读 |
+         | ---------------- | ---- | ---------- | ---- |
+         | Read uncommitted | √    | √          | √    |
+         | Read committed   | ×    | √          | √    |
+         | Repeatable read  | ×    | ×          | √    |
+         | Serializable     | ×    | ×          | ×    |
 
     - mvcc 聚集索引和非聚集索引的结构
 
@@ -310,3 +315,44 @@ draft: false
       - Host(open) container 开放式
       - Container(join) container 联合挂载式，是host模式的延伸
       - None(Close) container 封闭式网络模式
+    
+    - 正在被执行的 goroutine 发生以下情况时让出当前 goroutine 的执行权，并调度后面的 goroutine 执行：
+      - IO 操作
+      - Channel 阻塞
+      - system call
+      - 运行较长时间
+    
+    - byte转string, 零内存拷贝方法
+      ```go
+      package main
+      
+      import (
+          "fmt"
+          "reflect"
+          "unsafe"
+      )
+      type Student struct {
+	      Name People
+      }
+      type People struct {
+	      X string
+	      S [2]int
+      }
+      func main() {
+          a := "aaa"
+	      b := (*[]byte)(unsafe.Pointer(&a))
+	      log.Println(b) // &[97 97 97]
+	      a = "ccc"
+	      log.Println(b) // &[99 99 99]
+	      *b = []byte{98, 98, 98}
+          log.Println(a) // bbb
+      }
+      s := Student{Name: People{
+	  	  X: "people",
+	  	  S: [2]int{1, 2},
+	  }}
+	  p := (*People)(unsafe.Pointer(&s))
+	  log.Println(p) // &{people [1 2]}
+	  s.Name.X = "student" 
+	  log.Println(p) // &{student [1 2]}
+      ```
