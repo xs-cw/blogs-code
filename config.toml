@@ -1,7 +1,7 @@
 ##########################################
 # 站点配置
 
-baseURL = "https://code.saltfish.fun"
+baseURL = "https://xs-cw.github.io/"
 title = "life worth"
 languageCode = "zh-CN"
 hasCJKLanguage = true
