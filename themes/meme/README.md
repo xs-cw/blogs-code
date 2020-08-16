@@ -1,4 +1,4 @@
-English | 
+English |
 [简体中文](https://github.com/reuixiy/hugo-theme-meme/blob/master/README.zh-cn.md)
 
 <div align="center"><img src="https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/static/icons/apple-touch-icon.png" /></div>
@@ -9,9 +9,21 @@ English |
 
 MemE is a powerful and highly customizable [GoHugo](https://github.com/gohugoio/hugo) theme for personal blogs. MemE focuses on elegance, simplicity, modernity, and code correctness. Also, I hope you would enjoy MemE like a meme and share MemE like a meme! Just like what your blog and articles do! 😝
 
-## Lighthouse Report
+## Preview
 
-![lighthouse-report.png](https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/images/lighthouse-report.png)
+![tn.png](https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/images/tn.png)
+
+### Browser support
+
+MemE uses [CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) and [let statements](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) extensively. These features are supported by the following browsers:
+
+* Chrome 49+
+* Firefox 44+
+* Edge 15+
+* Opera 36+
+* Safari 10+
+
+Internet Explorer does not support CSS variables.
 
 ## Quick Start
 
@@ -33,18 +45,15 @@ For users of other systems, see: https://gohugo.io/getting-started/installing/
 ```sh
 ~ $ cd blog
 ~/blog $ git init
-~/blog $ git submodule add https://github.com/reuixiy/hugo-theme-meme.git themes/meme
-```
-
-How to update MemE to the latest version?
-
-```sh
-~/blog $ git submodule update --rebase --remote
+~/blog $ git submodule add --depth 1 https://github.com/reuixiy/hugo-theme-meme.git themes/meme
 ```
 
 ### Blogging
 
-1. Replace `config.toml` with [config.toml](https://github.com/reuixiy/hugo-theme-meme/blob/master/config-examples/en-us/config.toml).
+1. Replace `config.toml` with [config examples](https://github.com/reuixiy/hugo-theme-meme/blob/master/config-examples/en/config.toml).
+   ```sh
+   ~/blog $ rm config.toml && cp themes/meme/config-examples/en/config.toml config.toml
+   ```
 
 2. Create a new post and the about page:
    ```sh
@@ -56,6 +65,34 @@ How to update MemE to the latest version?
    ```sh
    ~/blog $ hugo server -D
    ```
+
+## Customize MemE
+
+MemE uses SCSS via [Hugo Pipes](https://gohugo.io/hugo-pipes/introduction/) to generate CSS instead of static CSS file and provides a [`_custom.scss`](https://github.com/reuixiy/hugo-theme-meme/blob/master/assets/scss/custom/_custom.scss) for customization.
+
+Just create a `~/blog/assets/scss/custom/_custom.scss` and add your own styles into this file. Your `_custom.scss` will override `~/blog/themes/meme/assets/scss/custom/_custom.scss` and your custom CSS will be applied correctly.
+
+Actually, you can override any template of theme in Hugo, see this *unofficial mirror* page: https://gohugobrasil.netlify.com/themes/customizing/
+
+## Update MemE
+
+```sh
+~/blog $ git submodule update --rebase --remote
+```
+
+If failed, try:
+
+1. Delete `meme` folder, e.g.
+   ```sh
+   ~/blog $ rm -rf themes/meme
+   ```
+
+2. Clone MemE again
+   ```sh
+   ~/blog $ git clone --depth 1 https://github.com/reuixiy/hugo-theme-meme.git themes/meme
+   ```
+
+**Note that** MemE makes some brand new features or *breaking changes* sometimes, so please be sure to check [the modification history of `config.toml`](https://github.com/reuixiy/hugo-theme-meme/commits/master/config-examples) and update the related items after the update!
 
 ## Awesome MemE
 
@@ -75,7 +112,6 @@ expiryDate | * | string
 `<taxonomies>` eg: categories, tags, series | * | array
 description | * | string, Markdown supported
 summary | * | string, Markdown supported
-keywords | * | array
 images | * | array
 slug | * | string
 url | * | string
@@ -97,6 +133,7 @@ share | display post-share | boolean, override `displayPostShare` in `config.tom
 related | display related-posts | boolean, override `displayRelatedPosts` in `config.toml`, MemE only
 katex | add KaTeX support | boolean, override `enableKaTeX` in `config.toml`, MemE only
 mathjax | add MathJax support | boolean, override `enableMathJax` in `config.toml`, MemE only
+mermaid | add Mermaid support | boolean, override `enableMermaid` in `config.toml`, MemE only
 comments | set `false` to disable comments in mainSections or set `true` to enable comments in non-mainSections | boolean, MemE only
 smallCaps | small caps? | boolean, override `enableSmallCaps` in `config.toml`, MemE only
 dropCap | drop cap? | boolean, override `enableDropCap` in `config.toml`, MemE only
@@ -104,7 +141,7 @@ dropCapAfterHr | drop cap after every horizontal rule tag? | boolean, override `
 deleteHrBeforeDropCap | delete horizontal rule tag before drop cap? | boolean, override `deleteHrBeforeDropCap` in `config.toml`, MemE only
 indent | indent instead of margin? | boolean, override `paragraphStyle` in `config.toml`, MemE only
 indentFirstParagraph | indent the first paragraph? | boolean, override `indentFirstParagraph` in `config.toml`, MemE only
-align | normal, justify, center | srting, if euqal to "normal", will override `enableJustify` in `config.toml`, MemE only
+align | normal, justify, center | string, if equal to "normal", will override `enableJustify` in `config.toml`, MemE only
 original | original? You can add the following 8 terms if you set `false`. The `author` is required, other optional | boolean, override `original` in `config.toml`, MemE only
 author | author of original post | string, MemE only
 link | link of original post | string, URL, MemE only

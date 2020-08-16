@@ -2,9 +2,9 @@
 {{- $options := (dict "targetPath" $path "outputStyle" "compressed") -}}
 
 {{- if .Site.Params.enableFingerprint -}}
-    {{- $style := resources.Get "scss/main.scss" | resources.ExecuteAsTemplate "styles/main-rendered.scss" . | resources.ToCSS $options | resources.Fingerprint -}}
-    {{- printf `<link rel="stylesheet" href="%s" integrity="%s" data-instant-track />` $style.RelPermalink $style.Data.Integrity | safeHTML -}}
+    {{- $style := resources.Get "scss/main.scss" | resources.ExecuteAsTemplate (printf "%s/styles/main-rendered.scss" .Lang) . | resources.ToCSS $options | resources.Fingerprint -}}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" />
 {{- else -}}
-    {{- $style := resources.Get "scss/main.scss" | resources.ExecuteAsTemplate "styles/main-rendered.scss" . | resources.ToCSS $options -}}
-    {{- printf `<link rel="stylesheet" href="%s" data-instant-track />` $style.RelPermalink | safeHTML -}}
+    {{- $style := resources.Get "scss/main.scss" | resources.ExecuteAsTemplate (printf "%s/styles/main-rendered.scss" .Lang) . | resources.ToCSS $options -}}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
 {{- end -}}

@@ -11,48 +11,8 @@
         {{- end -}}
     {{- end -}}
 
-    <!-- Dark Mode -->
-    {{- if .Site.Params.enableDarkMode }}
-        <script>
-            const userPrefers = localStorage.getItem('theme');
-            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
-            if (userPrefers === 'dark') {
-                changeModeMeta('dark');
-            } else if (userPrefers === 'light') {
-                changeModeMeta('light');
-            } else if (darkModeMediaQuery.matches) {
-                changeModeMeta('dark');
-            } else if (lightModeMediaQuery.matches) {
-                changeModeMeta('light');
-            }
-            function changeModeMeta(theme) {
-                document.documentElement.setAttribute('data-theme', theme);
-                if (theme === 'dark') {
-                    changeThemeColor('{{ .Site.Params.themeColorDark }}');
-                } else {
-                    changeThemeColor('{{ .Site.Params.themeColor }}');
-                }
-            }
-            function changeThemeColor(themeColor) {
-                document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
-            }
-        </script>
-    {{- end }}
-
-    <!-- Force HTTPS Redirection -->
-    {{- if and .Site.Params.enableForceHTTPS (eq hugo.Environment "production") }}
-        {{ $url := urls.Parse .Site.BaseURL }}
-        {{ $host := $url.Host }}
-        <script>
-            if (window.location.host == "{{ $host | safeJS }}" && window.location.protocol != "https:") {
-                window.location.protocol = "https";
-            }
-        </script>
-    {{- end }}
-
     <!-- Responsive Web Design -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Avoid Automatic Format Detection -->
     <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
     <!-- Avoid Transcoding -->
@@ -60,21 +20,26 @@
     <!-- Avoid Baidu Mobile Search Transcoding -->
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    {{ partial "utils/title.html" . }}
-    {{- $title := .Scratch.Get "title" -}}
-    <title>{{ $title }}</title>
+    <title>{{ (partial "utils/title.html" (dict "$" . "title" .Title)).title }}</title>
 
     <!-- CSS -->
     {{- partial "style.html" . }}
 
+    <!-- JavaScript -->
+    {{ if ne .Kind "404" }}
+        {{ partial "script.html" . }}
+    {{ end }}
+
     <!-- Fonts -->
     {{- with .Site.Params.fontsLink -}}
-        {{ printf `<link rel="stylesheet" href="%s" />` . | safeHTML }}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+        <link rel="stylesheet" href="{{ . }}" media="print" onload="this.media='all'" />
+        <noscript><link rel="stylesheet" href="{{ . }}" /></noscript>
     {{- end }}
 
     <meta name="author" content="{{ .Params.author | default .Site.Author.name }}" />
-    {{ partial "utils/summary.html" . }}
-    {{- $description := .Description | default (.Scratch.Get "summary") | default .Site.Params.siteDescription | plainify -}}
+    {{- $description := .Description | default (partial "utils/summary.html" .) | default .Site.Params.siteDescription | plainify | htmlUnescape -}}
     <meta name="description" content="{{ $description }}" />
 
     <!-- Favicon, Icons, Web App -->
@@ -82,13 +47,9 @@
     {{- $safariMaskIcon := "icons/safari-pinned-tab.svg" -}}
     {{- $safariMaskColor := .Site.Params.safariMaskColor -}}
     {{- $appleTouchIcon := "icons/apple-touch-icon.png" -}}
-    {{- partial "utils/relative-url.html" (dict "Deliver" . "filename" "") -}}
-    {{- $url := .Scratch.Get "url" -}}
-    {{- $msApplicationStartURL := $url -}}
+    {{- $msApplicationStartURL := partial "utils/relative-url.html" (dict "$" . "filename" "") -}}
     {{- $msApplicationTileColor := .Site.Params.msApplicationTileColor -}}
-    {{- partial "utils/relative-url.html" (dict "Deliver" . "filename" "icons/mstile-150x150.png") -}}
-    {{- $url := .Scratch.Get "url" -}}
-    {{- $msApplicationTileImage := $url -}}
+    {{- $msApplicationTileImage := partial "utils/relative-url.html" (dict "$" . "filename" "icons/mstile-150x150.png") -}}
     {{- $manifest := "manifest.json" -}}
     <link rel="shortcut icon" href="{{ $favicon | relURL }}" type="image/x-icon" />
     <link rel="mask-icon" href="{{ $safariMaskIcon | relURL }}" color="{{ $safariMaskColor }}" />
@@ -105,27 +66,26 @@
 
     <!-- Atom / RSS -->
     {{ with .OutputFormats.Get "SectionsAtom" -}}
-        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType .Permalink $.Site.Title | safeHTML }}
+        <link rel="{{ .Rel }}" type="{{ .MediaType }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}" />
     {{ end -}}
     {{ with .OutputFormats.Get "SectionsRSS" -}}
-        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType .Permalink $.Site.Title | safeHTML }}
+        <link rel="{{ .Rel }}" type="{{ .MediaType }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}" />
     {{ end }}
 
     <!-- SEO -->
     <link rel="canonical" href="{{ .Permalink }}" />
-    {{- $Deliver := . -}}
     <!-- JSON-LD -->
     {{- with .Site.Params.jsonLD -}}
-        {{ partial "utils/json-ld.html" (dict "Deliver" $Deliver "description" $description) }}
+        {{ partial "utils/json-ld.html" (dict "$" $ "description" $description) }}
     {{- end }}
 
     <!-- Twitter Cards -->
     {{- with .Site.Params.twitterCards -}}
-        {{ partial "utils/twitter-cards.html" (dict "Deliver" $Deliver) }}
+        {{ partial "utils/twitter-cards.html" (dict "$" $) }}
     {{- end }}
     <!-- Open Graph -->
     {{- with .Site.Params.openGraph -}}
-        {{ partial "utils/open-graph.html" (dict "Deliver" $Deliver "description" $description) }}
+        {{ partial "utils/open-graph.html" (dict "$" $ "description" $description) }}
     {{- end }}
 
     {{- with .Site.Params.googleSiteVerification }}
@@ -133,6 +93,8 @@
     {{- end }}
 
     {{- if and .Site.Params.enableGoogleAnalytics (eq hugo.Environment "production") }}
+        <link rel="preconnect" href="https://www.google-analytics.com" crossorigin />
+
         {{ partial "third-party/google-analytics.html" . }}
     {{- end }}
 
@@ -145,10 +107,6 @@
     {{- if and .Site.Params.enableGoogleAutoAds (eq hugo.Environment "production") -}}
         {{ partial "third-party/google-adsense-auto.html" . }}
     {{- end }}
-
-    {{ if and .Site.Params.enablePostShare .Site.Params.shareViaQRCode }}
-        {{ partial "third-party/qrcode-generator.html" . }}
-    {{ end }}
 
     {{ partial "custom/head.html" . }}
 </head>
