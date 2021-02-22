@@ -297,36 +297,38 @@ D 不能使用内置函数delete删除map的元素
 20. 【2分】某文件的权限为-rw-r--r-x, 其对应权限用数值形式表示为 
 
 ```
-A0775
-B0745
-C0645
-D0643
+A 0775
+B 0745
+C 0645
+D 0643
 ```
 
 正确答案：C
 
 21. 【2分】下面这段代码输出什么？
+```go
 package main
+
 func main() {
-    var (
-    a int     = 0
-    b int64    = 0
-    c interface{} = int(0)
-    d interface{} = int64(0)
-    )
+	var (
+		a int         = 0
+		b int64       = 0
+		c interface{} = int(0)
+		d interface{} = int64(0)
+	)
 
-  println(c == 0)
-  println(c == a)
-  println(c == b)
-  println(d == b)
-  println(d == 0)
+	println(c == 0)
+	println(c == a)
+	println(c == b)
+	println(d == b)
+	println(d == 0)
 }
-
 ```
-Atrue true false true false
-Btrue false false true false
-Ctrue true true false false
-Dtrue true false true true
+```
+A true true false true false
+B true false false true false
+C true true true false false
+D true true false true true
 ```
 
 正确答案：A
@@ -334,12 +336,12 @@ Dtrue true false true true
 22. 【2分】 对任意实数c，从有N个无序元素的数组中寻找元素a、b，使得 a+b 的结果最接近c，最快的平均时间复杂度是
 
 ```
-AO(N^2)
-BO(log N)
-CO(N)
-DO(N^3)
-EO(NLogN)
-F不确定
+A O(N^2)
+B O(log N)
+C O(N)
+D O(N^3)
+E O(NLogN)
+F 不确定
 ```
 
 正确答案：E
@@ -351,10 +353,10 @@ F不确定
 23. 【2分】 请问以下哪个协议使用UDP作为网络层传输？
 
 ```
-AHTTP
-BTelnet
-CDNS
-DSMTP
+A HTTP
+B Telnet
+C DNS
+D SMTP
 ```
 
 正确答案：C
@@ -362,10 +364,10 @@ DSMTP
 24. 【2分】 `top`命令中，哪个字段表示进程所占用的常驻内存使用量？
 
 ```
-AVIRT
-BRES
-CSWAP
-DDATA
+A VIRT
+B RES
+C SWAP
+D DATA
 ```
 
 正确答案：B
@@ -373,8 +375,8 @@ DDATA
 25. 【2分】 用户数据包 UDP 的首部字段有 16 个字节，这种说法正确吗？
 
 ```
-A正确
-B不正确
+A 正确
+B 不正确
 ```
 
 正确答案：B
@@ -382,10 +384,10 @@ B不正确
 26. 【2分】 在使用`ping` 命令时使用什么参数可以指定网卡或IP？
 
 ```
-A-i
-B-I
-C-d
-D-D
+A -i
+B -I
+C -d
+D -D
 ```
 
 正确答案：B
@@ -393,10 +395,10 @@ D-D
 27. 【2分】 默认情况下，`ping`命令每一次发出的icmp包大小为多少？
 
 ```
-A32
-B56
-C64
-D72
+A 32
+B 56
+C 64
+D 72
 ```
 
 正确答案：C
@@ -404,10 +406,10 @@ D72
 28. 【2分】 在分层中继系统中，数据链路层接收或发送信息的基本单位是（）
 
 ```
-A比特
-B字节
-C帧
-D数据报
+A 比特
+B 字节
+C 帧
+D 数据报
 ```
 
 正确答案：C
@@ -415,10 +417,10 @@ D数据报
 29. 【2分】epoll底层的工作机制属于以下哪种io模型：
 
 ```
-Aasynchronous I/O
-BI/O multiplexing
-Csignal driven I/O
-Dnonblocking I/O
+A asynchronous I/O
+B I/O multiplexing
+C signal driven I/O
+D nonblocking I/O
 ```
 
 正确答案：B
@@ -426,10 +428,10 @@ Dnonblocking I/O
 30. 【2分】 当掩码位为/27时，子网中一共有多少个可用IP？
 
 ```
-A30
-B64
-C32
-D62
+A 30
+B 64
+C 32
+D 62
 ```
 
 正确答案：A
@@ -441,10 +443,10 @@ D62
 31. 【2分】 在 TCP/IP 体系结构中的 TCP 和 IP 所提供的服务分别为（）
 
 ```
-A链路层服务和网络层服务
-B网络层服务和传输层服务
-C传输层服务和应用层服务
-D传输层服务和网络层服务
+A 链路层服务和网络层服务
+B 网络层服务和传输层服务
+C 传输层服务和应用层服务
+D 传输层服务和网络层服务
 ```
 
 正确答案：D
@@ -452,21 +454,32 @@ D传输层服务和网络层服务
 32. 【2分】以下哪种加密方式属于非对称加密：
 
 ```
-A3DES
-BAES
-CRSA256
-DSHA256
+A 3DES
+B AES
+C RSA256
+D SHA256
 ```
 
 正确答案：C
 
-33. 【2分】以下这段代码的输出是？`var a [2]int for _, x := range a {    fmt.Println("x =", x)    a[1] = 8 } fmt.Println("a =", a) for _, n := range a {    n += 1 } fmt.Println("a =" a) `
-
+33. 【2分】以下这段代码的输出是？
+```go
+  var a [2]int
+	for _, x := range a {
+		fmt.Println("x =", x)
+		a[1] = 8
+	}
+	fmt.Println("a =", a)
+	for _, n := range a {
+		n += 1
+	}
+	fmt.Println("a =", a) 
 ```
-Ax = 0, x = 8, a = [0 8], a = [1 9]
-Bx = 0, x = 0, a = [0 8], a = [0 8]
-Cx = 0, x = 0, a = [0 8], a = [1 9]
-Dx = 0, x = 8, a = [0 8], a = [0 8]
+```
+A x = 0, x = 8, a = [0 8], a = [1 9]
+B x = 0, x = 0, a = [0 8], a = [0 8]
+C x = 0, x = 0, a = [0 8], a = [1 9]
+D x = 0, x = 8, a = [0 8], a = [0 8]
 ```
 
 正确答案：B
@@ -474,10 +487,10 @@ Dx = 0, x = 8, a = [0 8], a = [0 8]
 34. 【2分】现假设A进程与B进程建立了tcp连接。A进程发起了中断连接的动作（发送FIN报文），但B进程接收FIN报文后由于代码错误只发送了ACK报文即结束进程。假设此ACK报文被A进程接收。那么tcp连接的A端和B端分别处于什么状态：
 
 ```
-AFIN-WAIT-1, CLOSE-WAIT
-BFIN-WAIT-2, TIME-WAIT
+A FIN-WAIT-1, CLOSE-WAIT
+B FIN-WAIT-2, TIME-WAIT
 C FIN-WAIT-1, TIME-WAIT
-DFIN-WAIT-2, CLOSE-WAIT
+D FIN-WAIT-2, CLOSE-WAIT
 ```
 
 正确答案：D
@@ -485,10 +498,10 @@ DFIN-WAIT-2, CLOSE-WAIT
 35. 【2分】 mkdir 命令中，添加什么参数，使得在父目录不存在时，先创建父目录？
 
 ```
-A-m
-B-f
-C-d
-D-p
+A -m
+B -f
+C -d
+D -p
 ```
 
 正确答案：D
@@ -496,9 +509,9 @@ D-p
 36. 【2分】 linux发起socket读写操作时，线程状态转换将如何转换：
 
 ```
-A运行->就绪
-B运行->阻塞
-C就绪->阻塞
+A 运行->就绪
+B 运行->阻塞
+C 就绪->阻塞
 ```
 
 正确答案：B
@@ -506,10 +519,10 @@ C就绪->阻塞
 37. 【2分】 如何将 `test` 文件打包并使用gzip压缩？
 
 ```
-Atar -zcvf test test.tar.gz
-Btar -zcvf test.tar.gz test
-Ctar -jcvf test.tar.gz test
-Dtar -jcvf test test.tar.gz
+A tar -zcvf test test.tar.gz
+B tar -zcvf test.tar.gz test
+C tar -jcvf test.tar.gz test
+D tar -jcvf test test.tar.gz
 ```
 
 正确答案：B
@@ -519,13 +532,24 @@ Dtar -jcvf test test.tar.gz
 Linux tar命令使用
 
 38. 【2分】下面这段程序的输出是：
-`func Foo() error {    var err *os.PathError = nil    return err } func main() {    err := Foo()    fmt.Println(err)    fmt.Println(err == nil) }`
+```go
+func Foo() error {
+	var err *os.PathError = nil
+	return err
+}
+
+func main() {
+	err := Foo()
+	fmt.Println(err)
+	fmt.Println(err == nil)
+}
+```
 
 ```
-Anil, false
-B"", true
-Cnil, true
-Dnil, runtime error
+A nil, false
+B "", true
+C nil, true
+D nil, runtime error
 ```
 
 正确答案：A
@@ -537,10 +561,10 @@ Dnil, runtime error
 39. 【2分】 如何根据`free`命令的输出，得知目前实际可用内存？
 
 ```
-Afree列数据
-Bfree列数据 - buffers列数据 + cached列数据
-Cfree列数据 + buffers列数据 + cached列数据
-Dfree列数据 + buffers列数据 - cached列数据
+A free列数据
+B free列数据 - buffers列数据 + cached列数据
+C free列数据 + buffers列数据 + cached列数据
+D free列数据 + buffers列数据 - cached列数据
 ```
 
 正确答案：C
@@ -548,10 +572,10 @@ Dfree列数据 + buffers列数据 - cached列数据
 40. 【2分】 ctrl + c 会给前台进程组中的进程发送什么信号？
 
 ```
-ASIGINT
-BSIGTSTP
-CSIGQUIT
-DSIGTERM
+A SIGINT
+B SIGTSTP
+C SIGQUIT
+D SIGTERM
 ```
 
 正确答案：A
@@ -561,6 +585,7 @@ DSIGTERM
 Linux信号机制
 
 41. 【2分】通道，运行下面这段代码输出什么？
+```go
 package main
 
 import "fmt"
@@ -582,12 +607,12 @@ func main() {
 
   fmt.Println(count)
 }
-
 ```
-Acan't compile
-Boutput 1
-Coutput 0
-Dthe program exits because of panic
+```
+A can't compile
+B output 1
+C output 0
+D the program exits because of panic
 ```
 
 正确答案：D
@@ -595,10 +620,10 @@ Dthe program exits because of panic
 42. 【2分】 ctrl + z 会给前台进程组中的进程发送什么信号？
 
 ```
-ASIGINT
-BSIGTSTP
-CSIGQUIT
-DSIGTERM
+A SIGINT
+B SIGTSTP
+C SIGQUIT
+D SIGTERM
 ```
 
 正确答案：B
@@ -610,10 +635,10 @@ Linux信号机制
 43. 【2分】 ctrl + / 会给前台进程组中的进程发送什么信号？
 
 ```
-ASIGINT
-BSIGTSTP
-CSIGQUIT
-DSIGTERM
+A SIGINT
+B SIGTSTP
+C SIGQUIT
+D SIGTERM
 ```
 
 正确答案：C
@@ -625,10 +650,10 @@ Linux信号机制
 44. 【2分】 以下哪个应用(Application)需要用到ICMP协议？
 
 ```
-Aftp
-Btraceroute
-Ctcpdump
-Dnetstat
+A ftp
+B traceroute
+C tcpdump
+D netstat
 ```
 
 正确答案：B
