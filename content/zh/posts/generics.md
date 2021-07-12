@@ -1,5 +1,5 @@
 ---
-title: "跨域问题"
+title: "go泛型试用"
 date: 2021-07-11T22:05:31+08:00
 tags: [golang,go]
 categories: [泛型]
